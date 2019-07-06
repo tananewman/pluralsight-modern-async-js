@@ -24,12 +24,12 @@ test("Verbose, hard to reuse, easy to forget, additional error handling mechanis
     }
 
     getWeather(null, function (error, weather) {
-      /*
+      
        if (error) {
        done(error);
        return;
        }
-       */
+      
       console.log("weather", weather);
     });
 
@@ -46,9 +46,8 @@ test("Seams rip across program", function (done) {
     if (error) {
       done(error);
       return;
-    }
+    }    
   });
-
 });
 
 test("Results aren't easily reused", function (done) {
