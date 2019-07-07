@@ -63,14 +63,13 @@ function fetchForecast(city) {
 
 function fetchWeather(city) {
   const operation = new Operation();
-
+  
   getWeather(city, operation.nodeCallback);
 
   return operation;
 }
 
 function Operation() {
-
   const operation = {
     successReactions: [],
     errorReactions: []
@@ -87,9 +86,7 @@ function Operation() {
   operation.onCompletion = function setCallbacks(onSuccess, onError) {
     const noop = function () {};
     operation.successReactions.push(onSuccess || noop);
-    operation.errorReactions.push(onError || noop);
-
-    
+    operation.errorReactions.push(onError || noop);    
   };
 
   operation.onFailure = function onFailure(onError) {
@@ -106,22 +103,6 @@ function Operation() {
 
   return operation;
 }
-
-test("register success callback async", function (done) {
-
-  var currentCity = fetchCurrentCity();
-  currentCity.onCompletion(city => console.log(`City found: ${city}`));
-
-  setTimeout(function () {
-
-    currentCity.onCompletion(function (city) {
-      fetchWeather(city);
-      done();
-    })
-
-  }, 1)
-
-});
 
 test("noop if no success handler passed", function (done) {
 
